@@ -1,0 +1,14 @@
+# Nmap 7.92 scan initiated Sun Jan 23 09:19:59 2022 as: nmap -T5 -p- -oN nmap.out 10.10.158.39
+Warning: 10.10.158.39 giving up on port because retransmission cap hit (2).
+Nmap scan report for 10.10.158.39
+Host is up (0.055s latency).
+Not shown: 64026 closed tcp ports (conn-refused), 1503 filtered tcp ports (no-response)
+PORT     STATE SERVICE
+21/tcp   open  ftp
+22/tcp   open  ssh
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3128/tcp open  squid-http
+3333/tcp open  dec-notes
+
+# Nmap done at Sun Jan 23 09:27:46 2022 -- 1 IP address (1 host up) scanned in 467.70 seconds
