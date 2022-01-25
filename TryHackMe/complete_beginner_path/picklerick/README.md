@@ -16,7 +16,7 @@ Looks like we need to find some credentials. And what better place than the sour
 ![source code](./images/page_source.png)
 
 Ok, we have the username. But what about the password?
-Let's do a directory brute force to see if there are other pages laying around that can contain the password:
+Let's do a directory brute force to see if there are other pages laying around that can contain the password:</br>
 ![dirb](./images/dirb_1.png)
 
 robots.txt looks interesting:
@@ -29,23 +29,26 @@ We tried using the credentials on the SSH service, unfortunately they didn't wor
 dirb http://10.10.67.35 /usr/share/wordlists/dirb/common.txt -r -X .js,.php,.html -o dirb_ext.out
 ```
 ![dirb ext](./images/dirb_ext.png)
+
 Bingo, login.php
 
 ![login](./images/login.png)
+
 Now if we try our credentials, we are able to log in and we are reddirected to *portal.php* page.
 
 ![portal](./images/portal.png)
+
 It looks like we can execute commands.
 
-Let's try our hypothesis with ````id; whoami; ls````:
+Let's try our hypothesis with ````id; whoami; ls````:</br>
 ![cmd](./images/cmd_panel.png)
 
-Great, we have a webshell, a clue, and a file that probably contains our first ingredient.
+Great, we have a webshell, a clue, and a file that probably contains our first ingredient.</br>
 ![cat](./images/cat_disabled.png)
 
 Oh, no! Looks like ````cat```` is disabled, so we need to find another way to read the file.
 </br>
-Since the file is in the same directory as our webpage, we can just browse to it:
+Since the file is in the same directory as our webpage, we can just browse to it:</br>
 ![1st ingredient](./images/ingredient_1.png)
 
 Another way would be to use the command ````less```` for example.
