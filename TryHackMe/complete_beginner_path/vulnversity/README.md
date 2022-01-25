@@ -58,6 +58,7 @@ We try a .php file and gives the error: "Extension not allowed"
 
 #### To identify which extensions are not blocked, we're going to fuzz the upload form. Run this attack, what extension is allowed?
 Following the steps given, we were able to replicate the attack, and find a successful extension (.phtml), note that the response length for this one is different than the others.
+
 ![burp](./images/burp.png)
 
 **Answer**: .phtml
