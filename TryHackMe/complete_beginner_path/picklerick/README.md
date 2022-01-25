@@ -7,22 +7,23 @@
 ## Quick enumeration
 We start by finding what ports are open:
 ![nmap](./images/nmap.png)
-</br>
+
 Typically SSH is not vulnerable and we don't have any credentials, so we will start by enumerating port 80.
 First step is to go to the webpage:
 ![webpage](./images/webpage.png)
-</br>
+
 Looks like we need to find some credentials. And what better place than the source code?
 ![source code](./images/page_source.png)
-</br>
+
 Ok, we have the username. But what about the password?
 Let's do a directory brute force to see if there are other pages laying around that can contain the password:
 ![dirb](./images/dirb_1.png)
-</br>
+
 robots.txt looks interesting:
 ![robots.txt](./images/robots.png)
 This seems exactly the password that our friend Rick would use. (If you don't know what *wubalubadubdub* means, you can see it [here](https://www.urbandictionary.com/define.php?term=wubalubadubdub))
-</br></br>
+</br>
+
 We tried using the credentials on the SSH service, unfortunately they didn't work. So this credentials are used somewhere on the website. We need to enumerate the website a little more.
 ```
 dirb http://10.10.67.35 /usr/share/wordlists/dirb/common.txt -r -X .js,.php,.html -o dirb_ext.out
@@ -54,18 +55,20 @@ Whoop! Whoop! We got our first ingredient!!! Only two more to go, but where do w
 2. Did you forget that there was a *clue.txt* file when we enumerated the directory?
 
 ![clue](./images/clue.png)
-OK, so the normal place for personal files would be in the */home* directory, if we go there we can see the user *rick*, and inside, a file with our second ingredient. Unfortunately, this file isn't in the same directory as our webpage, thus we can't navigate to it. Luckily we discovered 2 solutions to the problem, we can use ````less````:
+
+OK, so the normal place for personal files would be in the */home* directory, if we go there we can see the user *rick*, and inside, a file with our second ingredient. Unfortunately, this file isn't in the same directory as our webpage, thus we can't navigate to it. Luckily we discovered 2 solutions to the problem, we can use ````less````:</br>
 ![2nd ingredient](./images/ingredient_2.png)
 
 If you have done a few CTFs you can recognize the pattern that we're following. First we looked for a way into the box, second we enumerated the box and now the only stage that is left is no other than *privile escalation*
 </br>
-Let's start to see what privileges our user has:
+Let's start to see what privileges our user has:</br>
 ![sudo](./images/sudo.png)
+
 Wow, this is fantastic (for us the attackers ;) ) ````(ALL)```` users don't need password ````NOPASSWD```` to execute ````ALL```` commands. 
 <br>
-Thus, we can for example enumerate the */root* directory:
+Thus, we can for example enumerate the */root* directory:</br>
 ![ls](./images/ls.png)
-</br>
+
 ![3rd ingredient](./images/ingredient_3.png)
 And boom, we got our third and last ingredient to transform Rick back to a human.
  
