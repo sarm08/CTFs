@@ -23,6 +23,7 @@ thm{3517c902e22def9c6e09b99a9040ba09}
 ```
 #### 3. What's the "Get a cookie" flag?
 ![steps q3](./images/q3.png)
+
 **-i** is to **include** protocol headers in the output.
 ```
 thm{91b1ac2606f36b935f465558213d7ebd}
