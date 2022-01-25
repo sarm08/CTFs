@@ -57,7 +57,7 @@ We try a .php file and gives the error: "Extension not allowed"
 **Answer**: .php
 
 #### To identify which extensions are not blocked, we're going to fuzz the upload form. Run this attack, what extension is allowed?
-Following the steps given, we were able to replicate the attack, and find a successful extension.
+Following the steps given, we were able to replicate the attack, and find a successful extension (.phtml), note that the response length for this one is different than the others.
 ![burp](./images/burp.png)
 
 **Answer**: .phtml
@@ -66,18 +66,28 @@ Now we rename our shell to have .phtml extension, upload it, open a listener and
 ![reverse shell](./images/reverse_shell.png)
 
 #### What is the name of the user who manages the webserver?
-At first I thought it was *www-data* because that's the user we are when we get the reverse shell, meaning it was *www-data* who started the service. After I got it wrong, I proceeded to enumerate the users by reading the */etc/passwd* file and seeing that there's only one user called **bill**, the others are just root and services/default accounts.
+At first I thought it was *www-data* because that's the user we are when we get the reverse shell, meaning it was *www-data* who started the service. After I got it wrong, I proceeded to enumerate the users by reading the */etc/passwd* file and seeing that there's only one normal user called **bill**, the others are just the user root and services/default accounts.
 ![user enumeration](./images/passwd.png)
 
 **Answer**: bill
 
 #### What is the user flag?
 ![user_flag](./images/user_flag.png)
+
 **Answer**:8bd7992fbe8a6ad22a63361004cfcedb
 
 ## Privilege Escalation
 #### On the system, search for all SUID files. What file stands out?
 ![suid list](./images/suid_list.png)
+```
+find - to run the command find
+/ - start the search in the root directory
+-type f - search for regular files
+-perm -u=s - files that have the bit SUID on
+2>/dev/null - send the error outputs to /dev/null
+```
+systemctl is a tool to manage services that can be used by any user, so it's strange that has the SUID bit.
+
 **Answer**: /bin/systemctl
 
 #### Become root and get the last flag (/root/root.txt)
