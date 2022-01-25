@@ -78,7 +78,7 @@ Run the command "exploit" or "run".
 ![msf_migrate](./images/msf_migrate.png)
 **Answer**: No answer needed
 
-#### Migrate to this process using the 'migrate PROCESS_ID' command where the process id is the one you just wrote down in the previous step. This may take several attempts, migrating processes is not very stable. If this fails, you may need to re-run the conversion process or reboot the machine and start once again. If this happens, try a different process next time. 
+#### Migrate to this process using the 'migrate PROCESS-ID' command where the process id is the one you just wrote down in the previous step. This may take several attempts, migrating processes is not very stable. If this fails, you may need to re-run the conversion process or reboot the machine and start once again. If this happens, try a different process next time. 
 **Answer**: No answer needed
 
 ## Cracking
@@ -86,10 +86,12 @@ Dump the non-default user's password and crack it!
 
 #### Within our elevated meterpreter shell, run the command 'hashdump'. This will dump all of the passwords on the machine as long as we have the correct privileges to do so. What is the name of the non-default user? 
 ![msf_hashdump](./images/msf_hashdump.png)
+
 **Answer**: Jon
 
 #### Copy this password hash to a file and research how to crack it. What is the cracked password?
 ![crack_hash](./images/crack_hash.png)
+
 **Answer**: alqfna22
 
 ## Find flags!
